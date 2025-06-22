@@ -1,0 +1,18 @@
+<idea-plugin>
+    <id>co.anbora.labs.apiBlueprint</id>
+    <name>API Blueprint</name>
+    <vendor email="support@anbora.co" url="https://labs.anbora.co">Anbora-labs</vendor>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.intellij.plugins.markdown</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="Markdown" extensions="apib"/>
+
+        <fileIconProvider order="first" implementation="co.anbora.labs.apiblueprint.ide.icon.BluePrintIconsProvider"/>
+    </extensions>
+</idea-plugin>
