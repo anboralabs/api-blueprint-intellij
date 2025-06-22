@@ -13,6 +13,6 @@
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="Markdown" extensions="apib"/>
 
-        <fileIconProvider order="first" implementation="co.anbora.labs.apiblueprint.ide.icon.BluePrintIconsProvider"/>
+        <fileIconProvider order="first" implementation="co.anbora.labs.apiblueprint.ide.icons.BluePrintIconsProvider"/>
     </extensions>
 </idea-plugin>
