@@ -39,6 +39,10 @@ dependencies {
         plugins(properties("platformPlugins").map { it.split(',') })
         pluginVerifier()
     }
+    
+    // Test dependencies
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.1.0")
 }
 
 // Configure IntelliJ Platform Gradle Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-extension.html

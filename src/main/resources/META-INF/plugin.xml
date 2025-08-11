@@ -14,5 +14,9 @@
         <fileType name="Markdown" extensions="apib"/>
 
         <fileIconProvider order="first" implementation="co.anbora.labs.apiblueprint.ide.icons.BluePrintIconsProvider"/>
+        
+        <!-- API Blueprint Semantic Highlighting -->
+        <annotator language="Markdown" implementationClass="co.anbora.labs.apiblueprint.highlighting.ApiBlueprintAnnotator"/>
+        <colorSettingsPage implementation="co.anbora.labs.apiblueprint.highlighting.ApiBlueprintColorSettingsPage"/>
     </extensions>
 </idea-plugin>

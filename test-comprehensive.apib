@@ -1,0 +1,207 @@
+FORMAT: 1A
+HOST: https://api.example.com
+
+# Advanced API Blueprint Example
+This comprehensive API demonstrates all supported syntax highlighting features
+including MSON data structures, parameters, attributes, and advanced patterns.
+
+# Group Authentication
+Authentication related endpoints for user management.
+
+## Login [/auth/login]
+
+### Authenticate User [POST]
+Login with username and password to receive an authentication token.
+
++ Request (application/json)
+    + Attributes (LoginRequest)
+        + username: "john@example.com" (string, required) - User email address
+        + password: "secretPassword" (string, required) - User password
+        + remember_me: false (boolean, optional) - Keep user logged in
+        
+    + Headers
+    
+            Content-Type: application/json
+            Accept: application/json
+
++ Response 200 (application/json)
+    + Relation: success
+    + Attributes (AuthResponse)
+        + token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" (string, required) - JWT token
+        + expires_at: 1634567890 (number, required) - Token expiration timestamp
+        + user (User, required) - Authenticated user details
+
++ Response 401 (application/json)
+    + Attributes (ErrorResponse)
+
+# Group Users
+User management endpoints for CRUD operations on user resources.
+
+## Users Collection [/users{?page,size,sort}]
+
+### List Users [GET]
+Retrieve a paginated list of users with optional sorting.
+
++ Parameters
+    + page: 1 (number, optional) - Page number for pagination
+        + Default: `1`
+    + size: 25 (number, optional) - Number of items per page
+        + Default: `20`
+    + sort: "created_at" (string, optional) - Sort field
+        + Default: `created_at`
+
++ Response 200 (application/json)
+    + Attributes (UserListResponse)
+
+### Create User [POST]
+Create a new user account in the system.
+
++ Request (application/json)
+    + Attributes (CreateUserRequest)
+
++ Response 201 (application/json)
+    + Attributes (User)
+
++ Response 422 (application/json)
+    + Attributes (ValidationErrorResponse)
+
+## User [/users/{id}]
+Individual user resource for managing specific user accounts.
+
++ Parameters
+    + id: 123 (number, required) - Unique user identifier
+
+### Retrieve User [GET]
+Get detailed information about a specific user.
+
++ Relation: self
+
++ Response 200 (application/json)
+    + Attributes (User)
+
++ Response 404 (application/json)
+    + Attributes (ErrorResponse)
+
+### Update User [PUT]
+Update an existing user's profile information.
+
++ Request (application/json)
+    + Attributes (UpdateUserRequest)
+
++ Response 200 (application/json)
+    + Attributes (User)
+
+### Delete User [DELETE]
+Permanently remove a user account from the system.
+
++ Relation: delete
+
++ Response 204
+
+# Data Structures
+
+## User (object)
+Represents a user account in the system.
+
++ id: 123 (number, required) - Unique user identifier
++ username: "john_doe" (string, required) - Unique username
++ email: "john@example.com" (string, required) - User email address
++ first_name: "John" (string, required) - User first name
++ last_name: "Doe" (string, required) - User last name
++ age: 30 (number, optional) - User age in years
++ is_active: true (boolean, required) - Account status
++ created_at: "2023-10-01T10:30:00Z" (string, required) - Account creation timestamp
++ updated_at: "2023-10-15T14:22:00Z" (string, required) - Last update timestamp
++ profile (UserProfile, optional) - Extended user profile information
++ roles: admin, user (array[string], required) - User roles and permissions
+
+## UserProfile (object)
+Extended profile information for a user.
+
++ avatar_url: "https://api.example.com/avatars/123.jpg" (string, optional) - Profile picture URL
++ bio: "Software engineer passionate about APIs" (string, optional) - User biography
++ location: "San Francisco, CA" (string, optional) - User location
++ website: "https://johndoe.dev" (string, optional) - Personal website URL
++ social_links (array[SocialLink], optional) - Social media profiles
+
+## SocialLink (object)
+Social media profile link.
+
++ platform: "twitter" (string, required) - Social platform name
++ url: "https://twitter.com/johndoe" (string, required) - Profile URL
++ verified: true (boolean, optional) - Verification status
+
+## LoginRequest (object)
+Request payload for user authentication.
+
++ username: "user@example.com" (string, required) - User email or username
++ password: "password123" (string, required) - User password
++ remember_me: false (boolean, optional) - Extended session flag
+
+## AuthResponse (object)
+Successful authentication response.
+
++ token: "jwt_token_here" (string, required) - Authentication token
++ expires_at: 1634567890 (number, required) - Token expiration timestamp
++ user (User, required) - Authenticated user information
+
+## CreateUserRequest (object)
+Request payload for creating a new user.
+
++ username: "new_user" (string, required) - Desired username
++ email: "newuser@example.com" (string, required) - User email address
++ password: "securePassword123" (string, required) - Account password
++ first_name: "Jane" (string, required) - First name
++ last_name: "Smith" (string, required) - Last name
+
+## UpdateUserRequest (object)
+Request payload for updating user information.
+
++ first_name: "Updated Name" (string, optional) - Updated first name
++ last_name: "Updated Last" (string, optional) - Updated last name
++ email: "updated@example.com" (string, optional) - Updated email
++ profile (UserProfile, optional) - Updated profile information
+
+## UserListResponse (object)
+Paginated response containing multiple users.
+
++ data (array[User], required) - Array of user objects
++ pagination (PaginationMeta, required) - Pagination metadata
++ links (PaginationLinks, required) - Pagination navigation links
+
+## PaginationMeta (object)
+Metadata for paginated responses.
+
++ current_page: 1 (number, required) - Current page number
++ per_page: 20 (number, required) - Items per page
++ total: 150 (number, required) - Total number of items
++ last_page: 8 (number, required) - Last page number
+
+## PaginationLinks (object)
+Navigation links for paginated responses.
+
++ first: "/users?page=1" (string, required) - First page URL
++ last: "/users?page=8" (string, required) - Last page URL
++ prev: null (string, nullable) - Previous page URL
++ next: "/users?page=2" (string, nullable) - Next page URL
+
+## ErrorResponse (object)
+Standard error response format.
+
++ error: "Authentication failed" (string, required) - Error message
++ code: "AUTH_001" (string, required) - Error code
++ details (array[string], optional) - Additional error details
+
+## ValidationErrorResponse (object)
+Validation error response with field-specific errors.
+
++ error: "Validation failed" (string, required) - Main error message
++ code: "VALIDATION_ERROR" (string, required) - Error type
++ fields (array[FieldError], required) - Field-specific validation errors
+
+## FieldError (object)
+Individual field validation error.
+
++ field: "email" (string, required) - Field name with error
++ message: "Email format is invalid" (string, required) - Error description
++ code: "FORMAT_ERROR" (string, required) - Specific error code

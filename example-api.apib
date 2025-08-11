@@ -1,0 +1,70 @@
+FORMAT: 1A
+HOST: https://api.example.com
+
+# Users API
+Simple API for managing users in the system.
+
+# Group Users
+User management endpoints for CRUD operations.
+
+## Users Collection [/users]
+
+### List All Users [GET /users{?page,size}]
+Retrieve a paginated list of all users in the system.
+
++ Parameters
+    + page: 1 (number, optional) - Page number for pagination
+    + size: 25 (number, optional) - Number of items per page
+
++ Attributes (Coupon)
+    + id: 1 (number, required) - Coupon identifier
+    + code: "SAVE20" (string, required) - Coupon code
+
++ Response 200 (application/json)
+    + Body
+    
+            {
+                "items": [
+                    {
+                        "id": 1,
+                        "name": "John Doe",
+                        "email": "john@example.com"
+                    }
+                ]
+            }
+
+### Create User [POST /users]
+Create a new user in the system.
+
++ Request (application/json)
+    + Body
+    
+            {
+                "name": "Jane Smith",
+                "email": "jane@example.com"
+            }
+
++ Response 201 (application/json)
+
+## User [/users/{id}]
+
++ Parameters
+    + id: 1 (number, required) - Unique user identifier
+
+### Retrieve User [GET]
+Get details of a specific user.
+
++ Response 200 (application/json)
++ Response 404 (application/json)
+
+### Update User [PUT]
+Update an existing user's information.
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+### Delete User [DELETE]
+Remove a user from the system.
+
++ Response 204
