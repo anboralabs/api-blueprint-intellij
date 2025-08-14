@@ -5,6 +5,7 @@ import javax.swing.Icon
 
 object APIBluePrintIcons {
     val FILE = getIcon("blueprint.svg")
+    val FILE_40 = getIcon("blueprint_40.svg")
 
 
     private fun getIcon(path: String): Icon {

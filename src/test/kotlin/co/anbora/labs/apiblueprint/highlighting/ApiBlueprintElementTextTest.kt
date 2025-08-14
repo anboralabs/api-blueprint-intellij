@@ -1,7 +1,7 @@
 package co.anbora.labs.apiblueprint.highlighting
 
+import co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintRegexUtils
 import org.junit.Test
-import org.junit.Assert.*
 
 /**
  * Test how PSI element text might contain multiline content

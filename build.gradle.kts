@@ -1,6 +1,15 @@
 fun properties(key: String) = providers.gradleProperty(key)
 fun environment(key: String) = providers.environmentVariable(key)
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.guardsquare:proguard-gradle:7.3.1")
+    }
+}
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.0"
@@ -43,7 +52,47 @@ dependencies {
     // Test dependencies
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.1.0")
+
+    implementation("io.sentry:sentry:6.15.0")
 }
+
+tasks.register<proguard.gradle.ProGuardTask>("proguard") {
+    verbose()
+
+    // Alternatively put your config in a separate file
+    // configuration("config.pro")
+
+    // Use the jar task output as an input jar. This will automatically add the necessary task dependency.
+    injars(tasks.named("jar"))
+    outjars("build/${rootProject.name}-obfuscated.jar")
+
+    val javaHome = System.getProperty("java.home")
+
+    //Dependencies
+    if(!properties("skipProguard").get().toBoolean()) {
+        File("$javaHome/jmods/").listFiles()!!.forEach { libraryjars(it.absolutePath) }
+    }
+    libraryjars(configurations.compileClasspath.get())
+
+    //Processing-configuration
+    target(properties("javaVersion").get())
+    printmapping("build/obfuscation-mapping.txt")
+
+    dontshrink()
+    overloadaggressively()
+    repackageclasses("co.anbora.labs.apiblueprint")
+    renamesourcefileattribute("SourceFile")
+    adaptresourcefilecontents("**.xml")
+
+    keepdirectories("demo,messages")
+    keepattributes("InnerClasses,Signature,EnclosingMethod,SourceFile,LineNumberTable,*Annotation*")
+
+    dontwarn("kotlin.jvm.internal.SourceDebugExtension")
+}
+
+val inputPath = "build/libs/${rootProject.name}-$version.jar" //Where <PluginName> is the actual name of your plugin
+val outputPath = "build/${rootProject.name}-obfuscated.jar"
+
 
 // Configure IntelliJ Platform Gradle Plugin - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-extension.html
 intellijPlatform {
@@ -78,5 +127,23 @@ intellijPlatform {
 tasks {
     wrapper {
         gradleVersion = properties("gradleVersion").get()
+    }
+
+    prepareSandbox {
+        if(!properties("skipProguard").get().toBoolean()) {
+            dependsOn("proguard")
+            doFirst {
+                with(File(inputPath)) {
+                    if (exists()) {
+                        val proguarded = File(outputPath)
+                        if (proguarded.exists()) {
+                            delete() //delete original jar
+                            proguarded.renameTo(this)
+                            println("Plugin archive successfully obfuscated and optimized.")
+                        } else println("ProGuarded file doesn't exist.")
+                    } else println("Original file doesn't exist. $inputPath")
+                }
+            }
+        }
     }
 }

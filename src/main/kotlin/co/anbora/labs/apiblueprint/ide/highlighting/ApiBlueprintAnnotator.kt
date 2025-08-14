@@ -1,4 +1,4 @@
-package co.anbora.labs.apiblueprint.highlighting
+package co.anbora.labs.apiblueprint.ide.highlighting
 
 import co.anbora.labs.apiblueprint.extensions.isBluePrintFile
 import com.intellij.lang.annotation.AnnotationHolder

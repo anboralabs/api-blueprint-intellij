@@ -1,7 +1,7 @@
 package co.anbora.labs.apiblueprint.highlighting
 
+import co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintRegexUtils
 import org.junit.Test
-import org.junit.Assert.*
 
 /**
  * Test if multi-line descriptions after attributes affect highlighting
@@ -110,7 +110,7 @@ class ApiBlueprintMultilineTest {
         // Check in the order the annotator processes patterns
         
         // 1. Check metadata patterns (should not match)
-        if (ApiBlueprintRegexUtils.FORMAT_PATTERN.matches(line) || 
+        if (ApiBlueprintRegexUtils.FORMAT_PATTERN.matches(line) ||
             ApiBlueprintRegexUtils.HOST_PATTERN.matches(line)) {
             println("❌ ERROR: Matches metadata pattern (should not)")
         } else {

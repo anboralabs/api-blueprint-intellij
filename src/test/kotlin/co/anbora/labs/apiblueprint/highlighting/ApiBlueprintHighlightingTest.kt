@@ -1,8 +1,8 @@
 package co.anbora.labs.apiblueprint.highlighting
 
+import co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintRegexUtils
 import org.junit.Test
 import org.junit.Assert.*
-import kotlin.test.assertTrue
 
 /**
  * Comprehensive test class for API Blueprint syntax highlighting patterns.

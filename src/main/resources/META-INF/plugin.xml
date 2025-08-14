@@ -2,6 +2,8 @@
     <id>co.anbora.labs.apiBlueprint</id>
     <name>API Blueprint</name>
     <vendor email="support@anbora.co" url="https://labs.anbora.co">Anbora-labs</vendor>
+    <!-- TODO reminder: update the release-date and pluginVersion on new release, but change the release-version on new year only -->
+    <product-descriptor code="PAPIBLUEPRINT" release-date="20250814" release-version="10"/>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -16,7 +18,10 @@
         <fileIconProvider order="first" implementation="co.anbora.labs.apiblueprint.ide.icons.BluePrintIconsProvider"/>
         
         <!-- API Blueprint Semantic Highlighting -->
-        <annotator language="Markdown" implementationClass="co.anbora.labs.apiblueprint.highlighting.ApiBlueprintAnnotator"/>
-        <colorSettingsPage implementation="co.anbora.labs.apiblueprint.highlighting.ApiBlueprintColorSettingsPage"/>
+        <annotator language="Markdown" implementationClass="co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintAnnotator"/>
+        <colorSettingsPage implementation="co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintColorSettingsPage"/>
+
+        <postStartupActivity implementation="co.anbora.labs.apiblueprint.ide.startup.InitProject" />
+        <notificationGroup id="a6b98725-d171-4a3a-b712-ad3ac40cadc5_APIBlueprint_Notification" displayType="STICKY_BALLOON"/>
     </extensions>
 </idea-plugin>

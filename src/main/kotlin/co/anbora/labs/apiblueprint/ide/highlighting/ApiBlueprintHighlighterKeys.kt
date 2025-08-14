@@ -1,4 +1,4 @@
-package co.anbora.labs.apiblueprint.highlighting
+package co.anbora.labs.apiblueprint.ide.highlighting
 
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey

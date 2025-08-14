@@ -1,7 +1,7 @@
 package co.anbora.labs.apiblueprint.highlighting
 
+import co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintRegexUtils
 import org.junit.Test
-import org.junit.Assert.*
 
 /**
  * Test with the real example provided by the user to debug why section keywords aren't highlighted.

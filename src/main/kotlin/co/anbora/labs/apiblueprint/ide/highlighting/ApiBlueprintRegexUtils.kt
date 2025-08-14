@@ -1,4 +1,4 @@
-package co.anbora.labs.apiblueprint.highlighting
+package co.anbora.labs.apiblueprint.ide.highlighting
 
 /**
  * Centralized regex patterns for API Blueprint syntax detection.

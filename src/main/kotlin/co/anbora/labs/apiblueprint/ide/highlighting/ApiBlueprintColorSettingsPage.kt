@@ -1,10 +1,13 @@
-package co.anbora.labs.apiblueprint.highlighting
+package co.anbora.labs.apiblueprint.ide.highlighting
 
+import com.intellij.lexer.EmptyLexer
+import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
 import com.intellij.openapi.options.colors.AttributesDescriptor
 import com.intellij.openapi.options.colors.ColorDescriptor
 import com.intellij.openapi.options.colors.ColorSettingsPage
+import com.intellij.psi.tree.IElementType
 import javax.swing.Icon
 
 /**
@@ -17,10 +20,10 @@ class ApiBlueprintColorSettingsPage : ColorSettingsPage {
     
     override fun getHighlighter(): SyntaxHighlighter {
         return object : SyntaxHighlighter {
-            override fun getHighlightingLexer(): com.intellij.lexer.Lexer {
-                return com.intellij.lexer.EmptyLexer()
+            override fun getHighlightingLexer(): Lexer {
+                return EmptyLexer()
             }
-            override fun getTokenHighlights(tokenType: com.intellij.psi.tree.IElementType?): Array<TextAttributesKey> {
+            override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
                 return emptyArray()
             }
         }
