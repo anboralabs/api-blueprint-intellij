@@ -6,6 +6,8 @@ import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
+import com.intellij.psi.templateLanguages.OuterLanguageElement
+import org.intellij.plugins.markdown.lang.psi.impl.MarkdownFile
 
 /**
  * Annotator for API Blueprint semantic highlighting on Markdown files.
@@ -21,6 +23,8 @@ class ApiBlueprintAnnotator : Annotator {
         // Process all text elements for API Blueprint patterns
         val text = element.text ?: return
         if (text.trim().isEmpty()) return
+
+        if (element is OuterLanguageElement || element is MarkdownFile) return
         
         val baseOffset = element.textRange.startOffset
         
@@ -39,7 +43,7 @@ class ApiBlueprintAnnotator : Annotator {
 
     private fun annotateApiBlueprint(element: PsiElement, text: String, baseOffset: Int, holder: AnnotationHolder) {
         // Check for metadata (FORMAT, HOST)
-        if (ApiBlueprintRegexUtils.FORMAT_PATTERN.matches(text) || 
+        if (ApiBlueprintRegexUtils.FORMAT_PATTERN.matches(text) ||
             ApiBlueprintRegexUtils.HOST_PATTERN.matches(text)) {
             holder.newSilentAnnotation(HighlightSeverity.INFORMATION)
                 .range(element.textRange)
