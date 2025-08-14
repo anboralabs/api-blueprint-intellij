@@ -27,96 +27,96 @@ class ApiBlueprintColorSettingsPage : ColorSettingsPage {
     }
     
     override fun getDemoText(): String = """
-FORMAT: 1A
-HOST: https://api.example.com
+<meta>FORMAT: 1A</meta>
+<meta>HOST: https://api.example.com</meta>
 
-# Advanced API Blueprint Demo
+# <api_name>Advanced API Blueprint Demo</api_name>
 This demonstrates comprehensive syntax highlighting features.
 
-# Group Users
+# <group>Group Users</group>
 User management endpoints for CRUD operations.
 
-## Users Collection [/users{?page,size}]
+## Users Collection <resource>[/users<uri_var>{?page,size}</uri_var>]</resource>
 
-### List All Users [GET]
+### <action_name>List All Users</action_name> [<method>GET</method>]
 Retrieve a paginated list of all users in the system.
 
-+ Relation: self
++ <relation>Relation: self</relation>
 
-+ Parameters
-    + page: 1 (number, optional) - Page number for pagination
-        + Default: `1`
-    + size: 25 (number, optional) - Number of items per page
-        + Default: `20`
++ <section>Parameters</section>
+    + <param_name>page</param_name>: <number>1</number> (number, <flag>optional</flag>) - Page number for pagination
+        + Default: <string_value>`1`</string_value>
+    + <param_name>size</param_name>: <number>25</number> (number, <flag>optional</flag>) - Number of items per page
+        + Default: <string_value>`20`</string_value>
 
-+ Attributes (array[User])
++ <section>Attributes</section> <type_annotation>(array[User])</type_annotation>
 
-+ Response 200 (application/json)
-    + Attributes (UserListResponse)
++ <section>Response</section> <status>200</status> <mime>(application/json)</mime>
+    + <section>Attributes</section> <mson_type>(UserListResponse)</mson_type>
 
-### Create User [POST]
+### <action_name>Create User</action_name> [<method>POST</method>]
 Create a new user in the system.
 
-+ Request (application/json)
-    + Attributes (CreateUserRequest)
++ <section>Request</section> <mime>(application/json)</mime>
+    + <section>Attributes</section> <mson_type>(CreateUserRequest)</mson_type>
 
-+ Response 201 (application/json)
-    + Attributes (User)
++ <section>Response</section> <status>201</status> <mime>(application/json)</mime>
+    + <section>Attributes</section> <mson_type>(User)</mson_type>
 
-+ Response 422 (application/json)
-    + Attributes (ValidationError)
++ <section>Response</section> <status>422</status> <mime>(application/json)</mime>
+    + <section>Attributes</section> <mson_type>(ValidationError)</mson_type>
 
-## User [/users/{id}]
+## User <resource>[/users/<uri_var>{id}</uri_var>]</resource>
 
-+ Parameters
-    + id: 123 (number, required) - Unique user identifier
++ <section>Parameters</section>
+    + <param_name>id</param_name>: <number>123</number> (number, <flag>required</flag>) - Unique user identifier
 
-### Retrieve User [GET]
+### <action_name>Retrieve User</action_name> [<method>GET</method>]
 Get details of a specific user.
 
-+ Response 200 (application/json)
-    + Attributes (User)
++ <section>Response</section> <status>200</status> <mime>(application/json)</mime>
+    + <section>Attributes</section> <mson_type>(User)</mson_type>
 
-+ Response 404 (application/json)
-    + Attributes (ErrorResponse)
++ <section>Response</section> <status>404</status> <mime>(application/json)</mime>
+    + <section>Attributes</section> <mson_type>(ErrorResponse)</mson_type>
 
-# Data Structures
+# <data_structures>Data Structures</data_structures>
 
-## User (object)
+## <mson_type>User</mson_type> <type_annotation>(object)</type_annotation>
 Represents a user account in the system.
 
-+ id: 123 (number, required) - Unique user identifier
-+ username: "john_doe" (string, required) - Unique username
-+ email: "john@example.com" (string, required) - User email address
-+ first_name: "John" (string, required) - User first name
-+ last_name: "Doe" (string, required) - User last name  
-+ age: 30 (number, optional) - User age in years
-+ is_active: true (boolean, required) - Account status
-+ created_at: "2023-10-01T10:30:00Z" (string, required) - Account creation timestamp
-+ profile (UserProfile, optional) - Extended profile information
-+ roles: admin, user (array[string], required) - User roles
++ <param_name>id</param_name>: <number>123</number> (number, <flag>required</flag>) - Unique user identifier
++ <param_name>username</param_name>: <string_value>"john_doe"</string_value> (string, <flag>required</flag>) - Unique username
++ <param_name>email</param_name>: <string_value>"john@example.com"</string_value> <type_annotation>(string, required)</type_annotation> - User email address
++ <param_name>first_name</param_name>: <string_value>"John"</string_value> <type_annotation>(string, required)</type_annotation> - User first name
++ <param_name>last_name</param_name>: <string_value>"Doe"</string_value> <type_annotation>(string, required)</type_annotation> - User last name  
++ <param_name>age</param_name>: <number>30</number> <type_annotation>(number, optional)</type_annotation> - User age in years
++ <param_name>is_active</param_name>: true <type_annotation>(boolean, required)</type_annotation> - Account status
++ <param_name>created_at</param_name>: <string_value>"2023-10-01T10:30:00Z"</string_value> <type_annotation>(string, required)</type_annotation> - Account creation timestamp
++ <param_name>profile</param_name> <mson_type>(UserProfile, optional)</mson_type> - Extended profile information
++ <param_name>roles</param_name>: admin, user <type_annotation>(array[string], required)</type_annotation> - User roles
 
-## UserProfile (object)
+## <mson_type>UserProfile</mson_type> <type_annotation>(object)</type_annotation>
 Extended profile information for a user.
 
-+ avatar_url: "https://api.example.com/avatars/123.jpg" (string, optional) - Profile picture URL
-+ bio: "Software engineer passionate about APIs" (string, optional) - User biography
-+ location: "San Francisco, CA" (string, optional) - User location
-+ verified: true (boolean, optional) - Verification status
++ <param_name>avatar_url</param_name>: <string_value>"https://api.example.com/avatars/123.jpg"</string_value> <type_annotation>(string, optional)</type_annotation> - Profile picture URL
++ <param_name>bio</param_name>: <string_value>"Software engineer passionate about APIs"</string_value> <type_annotation>(string, optional)</type_annotation> - User biography
++ <param_name>location</param_name>: <string_value>"San Francisco, CA"</string_value> <type_annotation>(string, optional)</type_annotation> - User location
++ <param_name>verified</param_name>: true <type_annotation>(boolean, optional)</type_annotation> - Verification status
 
-## CreateUserRequest (object)
+## <mson_type>CreateUserRequest</mson_type> <type_annotation>(object)</type_annotation>
 Request payload for creating a new user.
 
-+ username: "new_user" (string, required) - Desired username
-+ email: "newuser@example.com" (string, required) - User email address
-+ password: "securePassword123" (string, required) - Account password
++ <param_name>username</param_name>: <string_value>"new_user"</string_value> <type_annotation>(string, required)</type_annotation> - Desired username
++ <param_name>email</param_name>: <string_value>"newuser@example.com"</string_value> <type_annotation>(string, required)</type_annotation> - User email address
++ <param_name>password</param_name>: <string_value>"securePassword123"</string_value> <type_annotation>(string, required)</type_annotation> - Account password
 
-## ErrorResponse (object)
+## <mson_type>ErrorResponse</mson_type> <type_annotation>(object)</type_annotation>
 Standard error response format.
 
-+ error: "User not found" (string, required) - Error message
-+ code: "USER_NOT_FOUND" (string, required) - Error code
-+ details (array[string], optional) - Additional error information
++ <param_name>error</param_name>: <string_value>"User not found"</string_value> <type_annotation>(string, required)</type_annotation> - Error message
++ <param_name>code</param_name>: <string_value>"USER_NOT_FOUND"</string_value> <type_annotation>(string, required)</type_annotation> - Error code
++ <param_name>details</param_name> <type_annotation>(array[string], optional)</type_annotation> - Additional error information
     """.trimIndent()
     
     override fun getColorDescriptors(): Array<ColorDescriptor> = emptyArray()
@@ -152,5 +152,32 @@ Standard error response format.
     
     override fun getDisplayName(): String = "API Blueprint"
     
-    override fun getAdditionalHighlightingTagToDescriptorMap(): Map<String, TextAttributesKey>? = null
+    override fun getAdditionalHighlightingTagToDescriptorMap(): Map<String, TextAttributesKey> = mapOf(
+        // Core API Blueprint elements
+        "meta" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_META,
+        "api_name" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_API_NAME,
+        "group" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_GROUP,
+        "resource" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_RESOURCE,
+        "action_name" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_ACTION_NAME,
+        "method" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_METHOD,
+        "uri_var" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_URI_VAR,
+        
+        // Section elements
+        "section" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_SECTION,
+        "mime" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_MIME,
+        "status" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_STATUS,
+        "relation" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_RELATION,
+        
+        // MSON elements
+        "type_annotation" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_TYPE_ANNOTATION,
+        "number" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_NUMBER,
+        "mson_type" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_MSON_TYPE,
+        "param_name" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_PARAMETER_NAME,
+        "property" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_PROPERTY,
+        "flag" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_FLAG,
+        "string_value" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_STRING_VALUE,
+        
+        // Advanced elements
+        "data_structures" to ApiBlueprintHighlighterKeys.APIBLUEPRINT_DATA_STRUCTURES
+    )
 }
