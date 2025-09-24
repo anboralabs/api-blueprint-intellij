@@ -4,7 +4,7 @@ fun environment(key: String) = providers.environmentVariable(key)
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.2.0"
-    id("org.jetbrains.intellij.platform") version "2.7.2"
+    id("org.jetbrains.intellij.platform") version "2.9.0"
 }
 
 group = properties("pluginGroup").get()
@@ -12,7 +12,7 @@ version = properties("pluginVersion").get()
 
 // Set the JVM language level used to build the project.
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 // Configure project's dependencies
