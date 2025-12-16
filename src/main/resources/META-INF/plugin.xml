@@ -13,11 +13,10 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <fileType name="API Blueprint"
-                  language="Markdown"
-                  extensions="apib"
-                  implementationClass="co.anbora.labs.apiblueprint.ide.fileType.ApiBluePrintFileType"/>
+        <fileType name="Markdown" extensions="apib"/>
 
+        <fileIconProvider order="first" implementation="co.anbora.labs.apiblueprint.ide.icons.BluePrintIconsProvider"/>
+        
         <!-- API Blueprint Semantic Highlighting -->
         <annotator language="Markdown" implementationClass="co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintAnnotator"/>
         <colorSettingsPage implementation="co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintColorSettingsPage"/>

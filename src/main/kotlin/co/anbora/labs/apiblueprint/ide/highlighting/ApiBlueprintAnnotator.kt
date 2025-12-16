@@ -1,6 +1,6 @@
 package co.anbora.labs.apiblueprint.ide.highlighting
 
-import co.anbora.labs.apiblueprint.ide.fileType.ApiBluePrintFileType
+import co.anbora.labs.apiblueprint.extensions.isBluePrintFile
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
@@ -18,7 +18,7 @@ class ApiBlueprintAnnotator : Annotator {
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
         // Only process elements in API Blueprint files
         val virtualFile = element.containingFile?.originalFile?.virtualFile ?: return
-        if (virtualFile.fileType !is ApiBluePrintFileType) return
+        if (!virtualFile.isBluePrintFile()) return
         
         // Process all text elements for API Blueprint patterns
         val text = element.text ?: return
