@@ -23,6 +23,7 @@
         <colorSettingsPage implementation="co.anbora.labs.apiblueprint.ide.highlighting.ApiBlueprintColorSettingsPage"/>
 
         <postStartupActivity implementation="co.anbora.labs.apiblueprint.ide.startup.InitProject" />
+        <postStartupActivity implementation="co.anbora.labs.apiblueprint.ide.startup.CheckRenderer" />
         <notificationGroup id="a6b98725-d171-4a3a-b712-ad3ac40cadc5_APIBlueprint_Notification" displayType="STICKY_BALLOON"/>
     </extensions>
 
