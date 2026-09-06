@@ -23,7 +23,7 @@ class ApiBlueprintColorSettingsPage : ColorSettingsPage {
             override fun getHighlightingLexer(): Lexer {
                 return EmptyLexer()
             }
-            override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
+            override fun getTokenHighlights(tokenType: IElementType): Array<TextAttributesKey> {
                 return emptyArray()
             }
         }
